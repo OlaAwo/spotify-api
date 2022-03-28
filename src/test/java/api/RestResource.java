@@ -5,8 +5,7 @@ import io.restassured.response.Response;
 
 import java.util.HashMap;
 
-import static api.SpecBuilder.getRequestSpec;
-import static api.SpecBuilder.getResponseSpec;
+import static api.SpecBuilder.*;
 import static io.restassured.RestAssured.given;
 
 public class RestResource {
@@ -40,11 +39,8 @@ public class RestResource {
     }
 
     public static Response postAccount(HashMap<String, String> form){
-        return given().
-                baseUri("https://accounts.spotify.com").
-                contentType(ContentType.URLENC).
+        return given(getAccountRequestSpec()).
                 formParams(form).
-                log().all().
                 when().post("/api/token").
                 then().spec(getResponseSpec()).
                 extract().response();
