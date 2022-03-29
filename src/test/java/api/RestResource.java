@@ -6,6 +6,8 @@ import io.restassured.response.Response;
 import java.util.HashMap;
 
 import static api.SpecBuilder.*;
+import static api.constants.Playlists.API;
+import static api.constants.Playlists.TOKEN;
 import static io.restassured.RestAssured.given;
 
 public class RestResource {
@@ -41,7 +43,7 @@ public class RestResource {
     public static Response postAccount(HashMap<String, String> form){
         return given(getAccountRequestSpec()).
                 formParams(form).
-                when().post("/api/token").
+                when().post(API + TOKEN).
                 then().spec(getResponseSpec()).
                 extract().response();
     }
