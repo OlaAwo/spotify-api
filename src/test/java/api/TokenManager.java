@@ -1,5 +1,6 @@
 package api;
 
+import api.utils.ConfigLoader;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -32,11 +33,10 @@ public class TokenManager {
 
     private static Response renewToken() {
         HashMap<String, String> form = new HashMap<String, String>();
-        form.put("grant_type", "refresh_token");
-        form.put("refresh_token", "AQDZ_EKG2UJAH0oRRYBA-ZMDWq9MQU6Z_r1O2ERjX1_CdvJaS5kPVzglSaXmqDu-zg9UoNc3NIAMHVc9d" +
-                "efqdqE8tQEoXCdDhTD4inPhucE1quBJUBO_47EcdPOBycm1v0U");
-        form.put("client_id", "0db4937cb09647cab8829682a31dba18");
-        form.put("client_secret", "4a79546d63f24781996ce74d5b6a8324");
+        form.put("grant_type", ConfigLoader.getInstance().getGrantType());
+        form.put("refresh_token", ConfigLoader.getInstance().getRefreshToken());
+        form.put("client_id", ConfigLoader.getInstance().getClientId());
+        form.put("client_secret", ConfigLoader.getInstance().getClientSecret());
 
         Response response = RestResource.postAccount(form);
 

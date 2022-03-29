@@ -1,6 +1,7 @@
 package api.controller;
 
 import api.RestResource;
+import api.utils.ConfigLoader;
 import io.restassured.response.Response;
 import pojo.playlist.Playlist;
 
@@ -11,11 +12,11 @@ import static api.constants.Playlists.USERS;
 public class Playlists {
 
     public static Response post(Playlist requestPlaylist) {
-        return RestResource.post(USERS + "/ola.awosile" + PLAYLISTS, getToken(), requestPlaylist);
+        return RestResource.post(USERS + "/" + ConfigLoader.getInstance().getUserId() + PLAYLISTS, getToken(), requestPlaylist);
     }
 
     public static Response post(Playlist requestPlaylist, String token) {
-        return RestResource.post(USERS + "/ola.awosile" + PLAYLISTS, token, requestPlaylist);
+        return RestResource.post(USERS + "/" + ConfigLoader.getInstance().getUserId() + PLAYLISTS, token, requestPlaylist);
     }
 
     public static Response get(String playlistID) {

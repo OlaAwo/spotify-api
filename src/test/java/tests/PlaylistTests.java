@@ -1,6 +1,8 @@
 package tests;
 
 import api.controller.Playlists;
+import api.utils.ConfigLoader;
+import api.utils.DataLoader;
 import pojo.error.Error;
 import pojo.playlist.Playlist;
 import io.restassured.response.Response;
@@ -39,7 +41,7 @@ public class PlaylistTests {
                 setDescription("New playlist description").
                 setPublic(false);
 
-        Response response = Playlists.get("1cNVL3rEaMEIdFcI2qhqSe");
+        Response response = Playlists.get(DataLoader.getInstance().getPlaylistId());
         assertThat(response.statusCode(), equalTo(200));
 
         Playlist responsePlaylist = response.as(Playlist.class);
@@ -55,7 +57,7 @@ public class PlaylistTests {
                 setDescription("New updated playlist description").
                 setPublic(false);
 
-        Response response = Playlists.put(requestPlaylist,"4hgZqzTKfwNBY57UqUS9Gt");
+        Response response = Playlists.put(requestPlaylist, DataLoader.getInstance().getUpdatePlaylistId());
         assertThat(response.statusCode(), equalTo(200));
     }
 
