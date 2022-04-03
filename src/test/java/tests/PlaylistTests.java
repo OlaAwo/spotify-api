@@ -3,6 +3,7 @@ package tests;
 import api.controller.Playlists;
 import api.utils.ConfigLoader;
 import api.utils.DataLoader;
+import org.jetbrains.annotations.NotNull;
 import pojo.error.Error;
 import pojo.playlist.Playlist;
 import io.restassured.response.Response;
@@ -66,7 +67,7 @@ public class PlaylistTests {
                 setPublic(isPublic);
     }
 
-    public void assertPlaylistEqual(Playlist responsePlaylist, Playlist requestPlaylist){
+    public void assertPlaylistEqual(@NotNull Playlist responsePlaylist, @NotNull Playlist requestPlaylist){
         assertThat(responsePlaylist.getName(), equalTo(requestPlaylist.getName()));
         assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
         assertThat(responsePlaylist.getPublic(), equalTo(requestPlaylist.getPublic()));
@@ -76,7 +77,7 @@ public class PlaylistTests {
         assertThat(actualStatusCode, equalTo(expectedStatusCode));
     }
 
-    public void assertError(Error responseError, int expectedStatusCode, String expectedErrorMessage){
+    public void assertError(@NotNull Error responseError, int expectedStatusCode, String expectedErrorMessage){
         assertThat(responseError.getError().getStatus(), equalTo(expectedStatusCode));
         assertThat(responseError.getError().getMessage(), equalTo(expectedErrorMessage));
     }

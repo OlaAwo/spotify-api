@@ -7,7 +7,7 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-import static api.constants.Playlists.BASE_PATH;
+import static api.constants.Base.BASE_PATH;
 
 public class SpecBuilder {
 

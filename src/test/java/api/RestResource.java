@@ -6,8 +6,8 @@ import io.restassured.response.Response;
 import java.util.HashMap;
 
 import static api.SpecBuilder.*;
-import static api.constants.Playlists.API;
-import static api.constants.Playlists.TOKEN;
+import static api.constants.Base.API;
+import static api.constants.Base.TOKEN;
 import static io.restassured.RestAssured.given;
 
 public class RestResource {

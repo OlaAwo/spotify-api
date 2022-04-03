@@ -3,6 +3,7 @@ package api;
 import api.utils.ConfigLoader;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -31,7 +32,7 @@ public class TokenManager {
         return access_token;
     }
 
-    private static Response renewToken() {
+    private static @NotNull Response renewToken() {
         HashMap<String, String> form = new HashMap<String, String>();
         form.put("grant_type", ConfigLoader.getInstance().getGrantType());
         form.put("refresh_token", ConfigLoader.getInstance().getRefreshToken());
