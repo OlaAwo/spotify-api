@@ -17,3 +17,4 @@ out/
 *.log
 *.txt
 target/
+allure-results/
