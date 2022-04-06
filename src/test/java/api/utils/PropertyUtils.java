@@ -8,6 +8,7 @@ import java.util.Properties;
 
 public class PropertyUtils {
 
+    // read properties from the config files
     public static Properties propertyLoader(String filePath) { // file path of the config file
         Properties properties = new Properties();
         BufferedReader reader;

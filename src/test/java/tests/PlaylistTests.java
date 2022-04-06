@@ -70,6 +70,7 @@ public class PlaylistTests {
                 _public(isPublic).build();
     }
 
+    // re-usable methods
     public void assertPlaylistEqual(@NotNull Playlist responsePlaylist, @NotNull Playlist requestPlaylist){
         assertThat(responsePlaylist.getName(), equalTo(requestPlaylist.getName()));
         assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
