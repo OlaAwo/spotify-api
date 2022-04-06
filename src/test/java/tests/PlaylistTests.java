@@ -24,7 +24,7 @@ public class PlaylistTests {
         Response response = Playlists.post(requestPlaylist);
         assertStatusCode(response.statusCode(), 201);
 
-        // deserialize response as pojo + assert
+        // deserialize response and assert
         assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
@@ -61,16 +61,16 @@ public class PlaylistTests {
     }
 
     public Playlist playlistBuilder(String name, String description, Boolean isPublic){
-        return new Playlist().
-                setName(name).
-                setDescription(description).
-                setPublic(isPublic);
+        return Playlist.builder().
+                name(name).
+                description(description).
+                _public(isPublic).build();
     }
 
     public void assertPlaylistEqual(@NotNull Playlist responsePlaylist, @NotNull Playlist requestPlaylist){
         assertThat(responsePlaylist.getName(), equalTo(requestPlaylist.getName()));
         assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
-        assertThat(responsePlaylist.getPublic(), equalTo(requestPlaylist.getPublic()));
+        assertThat(responsePlaylist.get_public(), equalTo(requestPlaylist.get_public()));
     }
 
     public void assertStatusCode(int actualStatusCode, int expectedStatusCode){
