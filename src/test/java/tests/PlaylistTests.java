@@ -3,6 +3,8 @@ package tests;
 import api.controller.Playlists;
 import api.utils.ConfigLoader;
 import api.utils.DataLoader;
+import io.qameta.allure.Description;
+import io.qameta.allure.Link;
 import org.jetbrains.annotations.NotNull;
 import pojo.error.Error;
 import pojo.playlist.Playlist;
@@ -15,7 +17,8 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class PlaylistTests {
 
-    @Test
+    @Description("This api should create a playlist with the correct parameters")
+    @Test (description = "Should be able to create a playlist")
     public void ShouldBeAbleToCreateAPlaylist() {
         // set payload request as a pojo class
         Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
@@ -28,7 +31,7 @@ public class PlaylistTests {
         assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
-    @Test
+    @Test (description = "Should be able to get a playlist")
     public void ShouldBeAbleToGetAPlaylist() {
         Playlist requestPlaylist = playlistBuilder("Test Playlist", "New playlist description", false);
         Response response = Playlists.get(DataLoader.getInstance().getPlaylistId());
@@ -36,14 +39,14 @@ public class PlaylistTests {
         assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
-    @Test
+    @Test (description = "Should be able to update a playlist")
     public void ShouldBeAbleToUpdateAPlaylist() {
         Playlist requestPlaylist = playlistBuilder("Update Playlist", "New updated playlist description", false);
         Response response = Playlists.put(requestPlaylist, DataLoader.getInstance().getUpdatePlaylistId());
         assertStatusCode(response.statusCode(), 200);
     }
 
-    @Test
+    @Test (description = "Should not be able to create a playlist without a name")
     public void ShouldNotBeAbleToCreateAPlaylistWithoutName() {
         Playlist requestPlaylist = playlistBuilder("", "New playlist description", false);
         Response response = Playlists.post(requestPlaylist);
@@ -51,7 +54,7 @@ public class PlaylistTests {
         assertError(response.as(Error.class), 400, "Missing required field: name");
     }
 
-    @Test
+    @Test (description = "Should not be able to create a playlist with an expired token")
     public void ShouldNotBeAbleToCreateAPlaylistWithExpiredToken() {
         String invalid_token = "12345";
         Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
