@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static api.utils.FakerUtils.*;
 
 public class PlaylistTests {
 
@@ -21,7 +22,7 @@ public class PlaylistTests {
     @Test (description = "Should be able to create a playlist")
     public void ShouldBeAbleToCreateAPlaylist() {
         // set payload request as a pojo class
-        Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
+        Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(), false);
 
         // execute request + get response + assert
         Response response = Playlists.post(requestPlaylist);
@@ -48,7 +49,7 @@ public class PlaylistTests {
 
     @Test (description = "Should not be able to create a playlist without a name")
     public void ShouldNotBeAbleToCreateAPlaylistWithoutName() {
-        Playlist requestPlaylist = playlistBuilder("", "New playlist description", false);
+        Playlist requestPlaylist = playlistBuilder("", generateDescription(), false);
         Response response = Playlists.post(requestPlaylist);
         assertStatusCode(response.statusCode(), 400);
         assertError(response.as(Error.class), 400, "Missing required field: name");
@@ -57,7 +58,7 @@ public class PlaylistTests {
     @Test (description = "Should not be able to create a playlist with an expired token")
     public void ShouldNotBeAbleToCreateAPlaylistWithExpiredToken() {
         String invalid_token = "12345";
-        Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
+        Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(), false);
         Response response = Playlists.post(requestPlaylist, invalid_token);
         assertStatusCode(response.statusCode(), 401);
         assertError(response.as(Error.class), 401, "Invalid access token");
