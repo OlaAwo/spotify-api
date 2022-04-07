@@ -1,5 +1,6 @@
 package tests;
 
+import api.StatusCode;
 import api.controller.Playlists;
 import api.utils.ConfigLoader;
 import api.utils.DataLoader;
@@ -26,7 +27,7 @@ public class PlaylistTests {
 
         // execute request + get response + assert
         Response response = Playlists.post(requestPlaylist);
-        assertStatusCode(response.statusCode(), 201);
+        assertStatusCode(response.statusCode(), StatusCode.CODE_201.getCode());
 
         // deserialize response and assert
         assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
@@ -36,7 +37,7 @@ public class PlaylistTests {
     public void ShouldBeAbleToGetAPlaylist() {
         Playlist requestPlaylist = playlistBuilder("Test Playlist", "New playlist description", false);
         Response response = Playlists.get(DataLoader.getInstance().getPlaylistId());
-        assertStatusCode(response.statusCode(), 200);
+        assertStatusCode(response.statusCode(), StatusCode.CODE_200.getCode());
         assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
@@ -44,15 +45,15 @@ public class PlaylistTests {
     public void ShouldBeAbleToUpdateAPlaylist() {
         Playlist requestPlaylist = playlistBuilder("Update Playlist", "New updated playlist description", false);
         Response response = Playlists.put(requestPlaylist, DataLoader.getInstance().getUpdatePlaylistId());
-        assertStatusCode(response.statusCode(), 200);
+        assertStatusCode(response.statusCode(), StatusCode.CODE_200.getCode());
     }
 
     @Test (description = "Should not be able to create a playlist without a name")
     public void ShouldNotBeAbleToCreateAPlaylistWithoutName() {
         Playlist requestPlaylist = playlistBuilder("", generateDescription(), false);
         Response response = Playlists.post(requestPlaylist);
-        assertStatusCode(response.statusCode(), 400);
-        assertError(response.as(Error.class), 400, "Missing required field: name");
+        assertStatusCode(response.statusCode(), StatusCode.CODE_400.getCode());
+        assertError(response.as(Error.class), StatusCode.CODE_400.getCode(), StatusCode.CODE_400.getMessage());
     }
 
     @Test (description = "Should not be able to create a playlist with an expired token")
@@ -60,8 +61,8 @@ public class PlaylistTests {
         String invalid_token = "12345";
         Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(), false);
         Response response = Playlists.post(requestPlaylist, invalid_token);
-        assertStatusCode(response.statusCode(), 401);
-        assertError(response.as(Error.class), 401, "Invalid access token");
+        assertStatusCode(response.statusCode(), StatusCode.CODE_401.getCode());
+        assertError(response.as(Error.class), StatusCode.CODE_401.getCode(), StatusCode.CODE_401.getMessage());
     }
 
     public Playlist playlistBuilder(String name, String description, Boolean isPublic){
