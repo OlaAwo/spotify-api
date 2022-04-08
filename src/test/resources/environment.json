@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "apiUri": "https://",
+    "validAdminUser": "",
+    "validAdminUserPassword": "",
+    "validAdminUserDevice": "",
+    "validUser": "",
+    "validUserPassword": "",
+    "validUserDevice": ""
+  },
+  "production": {
+    "apiUri": "https://",
+    "validAdminUser": "",
+    "validAdminUserPassword": "",
+    "validAdminUserDevice": "",
+    "validUser": "",
+    "validUserPassword": "",
+    "validUserDevice": ""
+  }
+}
