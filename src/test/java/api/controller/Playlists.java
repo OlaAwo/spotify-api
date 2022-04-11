@@ -11,7 +11,7 @@ import static api.constants.Playlists.USERS;
 
 public class Playlists {
 
-    // crud operations for the playlist endpoints
+    // Playlist api reusebale methods
     public static Response post(Playlist requestPlaylist) {
         return RestResource.post(USERS + "/" + ConfigLoader.getInstance().getUserId() + PLAYLISTS, getToken(), requestPlaylist);
     }
