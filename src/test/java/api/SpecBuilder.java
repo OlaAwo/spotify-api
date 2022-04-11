@@ -11,6 +11,7 @@ import static api.constants.Base.BASE_PATH;
 
 public class SpecBuilder {
 
+    // generic request/response specs
     public static RequestSpecification getRequestSpec() {
         return new RequestSpecBuilder().
                 setBaseUri("https://api.spotify.com").

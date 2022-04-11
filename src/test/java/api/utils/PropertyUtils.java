@@ -1,5 +1,7 @@
 package api.utils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,7 +11,7 @@ import java.util.Properties;
 public class PropertyUtils {
 
     // read properties from the config files
-    public static Properties propertyLoader(String filePath) { // file path of the config file
+    public static @NotNull Properties propertyLoader(String filePath) { // file path of the config file
         Properties properties = new Properties();
         BufferedReader reader;
         try{

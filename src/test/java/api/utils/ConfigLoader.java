@@ -10,7 +10,7 @@ public class ConfigLoader {
         properties = PropertyUtils.propertyLoader("src/test/resources/config.properties");
     }
 
-    // loads the config file only once
+    // loads the config file only once - singleton
     public static ConfigLoader getInstance(){
         if(configLoader == null){
             configLoader = new ConfigLoader();

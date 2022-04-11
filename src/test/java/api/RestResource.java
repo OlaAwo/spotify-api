@@ -12,6 +12,7 @@ import static io.restassured.RestAssured.given;
 
 public class RestResource {
 
+    // generic methods for all controllers
     public static Response post(String path, String token, Object requestPlaylist) {
         return given(getRequestSpec()).
                 auth().oauth2(token).

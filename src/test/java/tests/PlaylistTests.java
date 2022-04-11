@@ -65,6 +65,7 @@ public class PlaylistTests {
         assertError(response.as(Error.class), StatusCode.CODE_401.getCode(), StatusCode.CODE_401.getMessage());
     }
 
+    // generic request builder
     public Playlist playlistBuilder(String name, String description, Boolean isPublic){
         return Playlist.builder().
                 name(name).
@@ -72,7 +73,7 @@ public class PlaylistTests {
                 _public(isPublic).build();
     }
 
-    // re-usable methods
+    // re-usable assert methods
     public void assertPlaylistEqual(@NotNull Playlist responsePlaylist, @NotNull Playlist requestPlaylist){
         assertThat(responsePlaylist.getName(), equalTo(requestPlaylist.getName()));
         assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
