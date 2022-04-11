@@ -9,6 +9,7 @@ A simple rest api automation project.
 ## Features:
 
 - Implement OAuth 2.0 for token access management 🔐
+- Maven build for dependency management 📁
 - Automate positive and negative test cases ✔️ ❌
 - Create POJO classes for object serialization 👨‍💻
 - Create specification builder for request/responses and logging 🪧
@@ -18,3 +19,4 @@ A simple rest api automation project.
 - Create config/data properties file 🗄️
 - Lombok annotations for object getters/setters 🌀
 - Faker class to generate test data 🎗️
+- Allure reporting 📃
